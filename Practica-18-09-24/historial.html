@@ -6,79 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/styles.css">
+
     <title>Document</title>
 </head>
+<!---->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const alumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
+        const tbody = document.getElementById('alumnos-tbody');
+        //contancia 
+        const nies = document.getElementById('nie');
+        const nombres = document.getElementById('nombre');
+        const Mate = document.getElementById('Matematicas');
+        const So = document.getElementById('Sociales');
+        const In = document.getElementById('Ingles');
+        const Info = document.getElementById('Informatica');
+        alumnos.forEach(datos => {
+            nies.textContent = datos.nie;
+            nombres.textContent = datos.nombre + datos.apellidos;
+            Mate = textContent = datos.Matematicas;
+            So = textContent = datos.Sociales;
+            In = textContent = datos.Ingles;
+            Info = textContent = datos.Informatica;
+
+        });
+    });
+</script>
+
+
+<!---->
 <style>
-    /* Estilos básicos para la página */
-    
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
-    
-    h2 {
-        text-align: center;
-    }
-    
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    
-    th,
-    td {
-        text-align: left;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    th {
-        background-color: #f2f2f2;
-    }
-    /* Estilos para el table */
-    
-    .table-notas {
-        margin-top: 20px;
-    }
-    
-    .table-notas th {
-        font-weight: bold;
-    }
-    /* Estilos para las pestañas */
-    
-    .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-        display: flex;
-        flex-direction: row;
-    }
-    
-    .tab button {
-        background-color: inherit;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        width: 25%;
-        font-size: 17px;
-    }
-    
-    .tab button:hover {
-        background-color: #ddd;
-    }
-    
-    .tabcontent {
-        display: none;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-    
-    .tabcontent img {
-        margin: auto;
-        display: block;
-    }
+
 </style>
 
 <body>
@@ -110,22 +68,15 @@
                 <tbody>
                     <!-- Ejemplo 1 en el 1er Período -->
                     <tr>
-                        <td>EST001</td>
-                        <td>John Doe</td>
-                        <td>8.5</td>
-                        <td>9.0</td>
-                        <td>8.2</td>
-                        <td>8.8</td>
+                        <td id="nie"></td>
+                        <td id="nombre"></td>
+                        <td id="Matematica"></td>
+                        <td id="Sociales"></td>
+                        <td id="Ingles"></td>
+                        <td id="Informatica"></td>
                     </tr>
                     <!-- Ejemplo 2 en el 1er Período -->
-                    <tr>
-                        <td>EST002</td>
-                        <td>Jane Doe</td>
-                        <td>7.9</td>
-                        <td>8.1</td>
-                        <td>8.5</td>
-                        <td>8.3</td>
-                    </tr>
+
                     <!-- Agregar más filas aquí -->
                 </tbody>
             </table>
@@ -238,44 +189,61 @@
                 </tbody>
             </table>
         </div>
+        <!---->
+        <h1>Historial de Notas</h1>
+        <div class="table-notas">
+            <!-- ... -->
+        </div>
 
+        <div class="table-notas">
+            <h2>Notas por Período:</h2>
+            <button id="btnImprimir" style="background-color: #206aac; color: #fff;" class="me-2" style="display: none;">Imprimir</button>
+            <script>
+                document.getElementById("btnImprimir").addEventListener("click", imprimirDatos);
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            // Detectar la URL actual y aplicar la clase active al enlace correspondiente
-            const currentLocation = location.href;
-            const menuItem = document.querySelectorAll('.nav-link');
-            const menuLength = menuItem.length;
+                function imprimirDatos() {
+                    const btn = document.getElementById('btnImprimir');
+                    //btn.classList.add('ocultar')
+                    window.print();
+                }
+            </script>
+            <!---->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Detectar la URL actual y aplicar la clase active al enlace correspondiente
+                const currentLocation = location.href;
+                const menuItem = document.querySelectorAll('.nav-link');
+                const menuLength = menuItem.length;
 
-            for (let i = 0; i < menuLength; i++) {
-                // Eliminar la clase 'active' de todos los enlaces
-                menuItem[i].classList.remove('active');
+                for (let i = 0; i < menuLength; i++) {
+                    // Eliminar la clase 'active' de todos los enlaces
+                    menuItem[i].classList.remove('active');
 
-                // Agregar la clase 'active' solo al enlace que coincide con la URL actual
-                if (menuItem[i].href === currentLocation) {
-                    menuItem[i].classList.add('active');
+                    // Agregar la clase 'active' solo al enlace que coincide con la URL actual
+                    if (menuItem[i].href === currentLocation) {
+                        menuItem[i].classList.add('active');
+                    }
                 }
-            }
-            ////////////////////////////////////////
-            function openTab(event, tabName) {
-                // ...
-                if (tabName === "1er período") {
-                    tabName = "1erPeriodo";
+                ////////////////////////////////////////
+                function openTab(event, tabName) {
+                    // ...
+                    if (tabName === "1er período") {
+                        tabName = "1erPeriodo";
+                    }
+                    // ...
+                    let i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(tabName).style.display = "block";
+                    event.currentTarget.className += " active";
                 }
-                // ...
-                let i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(tabName).style.display = "block";
-                event.currentTarget.className += " active";
-            }
-        </script>
+            </script>
 </body>
 
 </html>
